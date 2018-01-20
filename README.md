@@ -1,5 +1,5 @@
 # spider-python-demo-movie
-这是使用python,requests,windows平台来爬取电影网站，使用redis存图片的入门demo
+这是使用python,requests,windows平台来爬取电影网站，使用redis的入门demo
 
 run.py 启动爬虫
 
