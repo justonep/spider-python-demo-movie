@@ -2,11 +2,16 @@
 这是使用python,requests,windows平台来爬取电影网站，使用redis存图片的入门demo
 
 run.py 启动爬虫
+
 setting.py 存放一些配置文件，如redis地址，用户名密码，图片保存地址
+
 utils.py 存放一些写的工具方法，get_page 获取页面，build_xpath_tree建立xpath树，
             windows_name_format，对电影名进行清洗
+            
 conn.py 连接redis
+
 spider.py xpath提取下载网页的信息
+
 
 
 
