@@ -3,7 +3,7 @@ from fake_useragent import UserAgent
 from lxml import etree
 '''chardet.detect(str)可以去自动判别编码'''
 import chardet
-
+import http
 
 def get_page(url,encoding=0,**options):
     """
@@ -33,14 +33,16 @@ def get_page(url,encoding=0,**options):
     except ConnectionError:
         print('connect error')
 
+    # 当解码时发生异常，忽略异常部分的部分文字
     except UnicodeDecodeError as DecodeDo:
         warning = 'download models decode happen some errors,'+str(DecodeDo)+'\n'+url
         print(warning)
         return result.content.decode(encoding,'ignore')
 
-    except ConnectionError as ConnDo:
+    # 由于user-agent导致的被服务器拒绝
+    except http.client.RemoteDisconnected as ConnDo:
         print('{} connection error ,restart.'.format(url)+str(ConnDo))
-        get_page(url,encoding,**options)
+        get_page(url, encoding, **options)
 
 def build_xpath_tree(html):
     """
@@ -54,12 +56,12 @@ def build_xpath_tree(html):
 
 def windows_name_format(name):
     """
-
+    由于windows禁止部分字符作为文件名
     :param name:
     :return: 返回一个不包含   < > / \ | : " * ?的字符串
     """
 
     invalid_chars = ['<', '>', '/', '\\', ':', '"', '*']
     for char in invalid_chars:
-        name=name.replace(char, '')
+        name = name.replace(char, '')
     return name

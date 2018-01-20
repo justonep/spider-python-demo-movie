@@ -2,7 +2,6 @@ from utils import get_page,build_xpath_tree,windows_name_format
 from conn import RedisClient
 from setting import *
 import re
-import time
 import redis
 
 class DyttSpider(object):
@@ -12,7 +11,6 @@ class DyttSpider(object):
 
     def menu(self):
         for i in range(1,2):
-            time.sleep(0.2)
             target_url = 'http://www.ygdy8.net/html/gndy/oumei/list_7_{}.html'.format(i)
             '''建立一个selector选择器，用于xpath过滤'''
             selector = build_xpath_tree(get_page(target_url,'gb2312'))
@@ -47,6 +45,3 @@ class DyttSpider(object):
                 print(e)
 
 
-
-dyt=DyttSpider()
-dyt.menu()
