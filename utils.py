@@ -14,12 +14,12 @@ def get_page(url,encoding=0,**options):
     :return: 用于获取网页的html代码
     """
 
-    '''获取一个随机的useragent'''
+    # 获取一个随机的useragent
     useragents = UserAgent()
     base_headers = {
         'User-Agent':  useragents.random,
     }
-    '''以应对不同网站可能需要特定的参数 ，如 cookies，oauth之类的参数，保证代码的重复利用'''
+    # 以应对不同网站可能需要特定的参数 ，如 cookies，oauth之类的参数，保证代码的重复利用
     base_headers = dict(base_headers, **options)
     try:
         result=requests.get(url,headers=base_headers)
